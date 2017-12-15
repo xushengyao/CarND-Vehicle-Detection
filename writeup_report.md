@@ -57,15 +57,15 @@ Here is an example using the `RGB` color space and HOG parameters of `orientatio
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters, finally I decided to use the class used 'YCrCb' color space, with SVM classifier, I got a very good accuracy. Also, for tuning parameters, I tried some and found out the class reference is a good base.
+I tried various combinations of parameters, finally I decided to use the class used 'YUV' color space, with SVM classifier, I got a very good accuracy. Also, for tuning parameters, I tried some and found out the class reference is a good base.
 
 
 |   Parameters   | Values  |
 |:--------------:|:-------:|
-|  color_space   | 'YCrCb' |
+|  color_space   | 'YUV' |
 |  spatial_size  | (32,32) |
 |   hist_bins    |   32    |
-|     orient     |    9    |
+|     orient     |    13    |
 |  pix_per_cell  |    8    |
 | cell_per_block |    2    |
 |  hog_channel   |  'All'  |
@@ -75,25 +75,13 @@ I tried various combinations of parameters, finally I decided to use the class u
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using YCrCb HOG featurs with historgram of color and spatially binned color. The test accuracy is 99.18%.
+I trained a linear SVM using YUV HOG featurs with historgram of color and spatially binned color. The test accuracy is 98.93%.
 
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-Regarding the scaling-window search, I used the multi-scale slide method instead of a dynamic one. I hardcode three scales to implement the search. The details is shown below. It works fine for the test video. But definitely a dynamic scaling search approach will be better.
-
-```python
-    ystart_top=350
-    ystop_top=540
-    scale_top=1.0
-    ystart_middle=400
-    ystop_middle=650
-    scale_middle=1.5
-    ystart_bottom=400
-    ystop_bottom=650
-    scale_bottom=2.25
-```
+Regarding the scaling-window search, I used the multi-scale slide method instead of a dynamic one. I hardcode ten scales to implement the search. The details is shown below. It works fine for the test video. But definitely a dynamic scaling search approach will be better.
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
